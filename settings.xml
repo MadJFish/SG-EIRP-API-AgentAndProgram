@@ -132,13 +132,21 @@ under the License.
     -->
 
       <server>
-        <id>sg-eirp.maven-repo.net</id>
+        <id>sg-eirp.maven-repo.net-snapshot</id>
         <username>AKIASHCJL57FGWN67IFS</username>
         <password>+wxPqTeuE70rdntCPwhaA9i7WAv2Zg7+XRAtCgJG</password>
         <configuration>
           <region>ap-southeast-1</region>
         </configuration>
       </server>
+    <server>
+      <id>sg-eirp.maven-repo.net-release</id>
+      <username>AKIASHCJL57FGWN67IFS</username>
+      <password>+wxPqTeuE70rdntCPwhaA9i7WAv2Zg7+XRAtCgJG</password>
+      <configuration>
+        <region>ap-southeast-1</region>
+      </configuration>
+    </server>
   </servers>
 
   <!-- mirrors

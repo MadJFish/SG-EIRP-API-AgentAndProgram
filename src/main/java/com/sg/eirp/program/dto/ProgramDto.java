@@ -2,30 +2,39 @@ package com.sg.eirp.program.dto;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProgramDto {
-	public String programId;
+	private String programId;
 	
-	public String programName;
+	private String programName;
 	
-	public String programDescription;
+	private String programDescription;
 	
-	public String rogramDetailParagraph;
+	private String rogramDetailParagraph;
 	
-	public String imageUrl;
+	private String imageUrl;
 	
-	public String subject;
+	private String subject;
 	
-	public String forEducationLevel;
+	private String forEducationLevel;
 	
-	public Integer forMinAge;
+	private Integer forMinAge;
 	
-	public Integer forMaxAge;
+	private Integer forMaxAge;
 	
-	public String duration;
+	private String duration;
 	
-	public String cost;
+	private String cost;
 	
-	public List<String> locations;
+	private List<String> locations;
 	
-	public String trainerId;
+	private String trainerId;
 }
