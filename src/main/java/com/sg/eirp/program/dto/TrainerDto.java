@@ -3,23 +3,23 @@ package com.sg.eirp.program.dto;
 import java.util.List;
 
 public class TrainerDto {
-	public String id;
-	
-	public String name;
-	
-	public String imageUrl;
-	
-	public String videoUrl;
-	
-	public String promoText;
-	
-	public Boolean featured;
-	
-	public List<String> targetEduLevels;
-	
-	public String phone;
-	
-	public String email;
+	private String id;
+
+	private String name;
+
+	private String imageUrl;
+
+	private String videoUrl;
+
+	private String promoText;
+
+	private Boolean featured;
+
+	private List<String> targetEduLevels;
+
+	private String phone;
+
+	private String email;
 	
 	public String aboutUs;
 	

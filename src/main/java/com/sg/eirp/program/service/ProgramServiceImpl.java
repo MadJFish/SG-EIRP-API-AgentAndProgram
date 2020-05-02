@@ -1,6 +1,8 @@
 package com.sg.eirp.program.service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -37,4 +39,8 @@ public class ProgramServiceImpl implements ProgramService {
         return programList;
 	}
 
+	@Override
+	public Optional<Program> getByProgramId(UUID programId) {
+		return programRepo.findById(programId);
+	}
 }

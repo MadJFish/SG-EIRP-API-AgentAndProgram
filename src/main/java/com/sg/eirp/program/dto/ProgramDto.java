@@ -18,7 +18,7 @@ public class ProgramDto {
 	
 	private String programDescription;
 	
-	private String rogramDetailParagraph;
+	private String programDetailParagraph;
 	
 	private String imageUrl;
 	
