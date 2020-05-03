@@ -10,5 +10,5 @@ import java.util.UUID;
 
 public interface DocumentRepo extends CrudRepository<Document, UUID> {
     @Query("SELECT d FROM Document d where d.referenceTable = :referenceTable and d.referenceId = :referenceId")
-    Optional<List<Document>> findByReferenceId(String referenceTable, String referenceId);
+    Optional<List<Document>> findByReferenceId(String referenceTable, UUID referenceId);
 }

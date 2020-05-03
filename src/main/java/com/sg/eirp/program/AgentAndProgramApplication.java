@@ -12,6 +12,7 @@ import org.springframework.data.repository.RepositoryDefinition;
 @EnableJpaRepositories("com.sg.eirp.program.repo")
 @EntityScan("com.sg.eirp.program.model")
 @ComponentScan("com.sg.eirp.program")
+@ConfigurationPropertiesScan("com.sg.eirp.program.config")
 @SpringBootApplication
 public class AgentAndProgramApplication {
 

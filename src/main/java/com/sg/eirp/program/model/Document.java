@@ -34,5 +34,5 @@ public class Document {
     private String referenceTable;
 
     @Column(name = "reference_id")
-    private String referenceId;
+    private UUID referenceId;
 }

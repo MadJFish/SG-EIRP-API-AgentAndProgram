@@ -34,20 +34,14 @@ public class Agency {
 	@Column
 	private String name;
 	
-	@Column (name = "image_url")
-	private String imageUrl;
-	
-	@Column (name = "video_url")
-	private String videoUrl;
-	
-	@Column
-	private String title;
+	@Column(name = "promo_text")
+	private String promoText;
 	
 	@Column
 	private String description;
 	
 	@Column (name = "is_featured")
-	private boolean featured;
+	private String featured;
 	
 	@Column (name = "education_level")
 	private String targetEducationLevel;
@@ -71,13 +65,8 @@ public class Agency {
 	@JoinColumn (name = "hq_address_id", referencedColumnName = "address_id")
 	private Address hqAddress;
 	
-	@OneToMany(mappedBy = "agency",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "agency", cascade = CascadeType.ALL)
     private Set<AgencyBranch> branches = new HashSet<>();
-
-	/*
-	@OneToMany(mappedBy = "agency")
-    private Set<Document> attachments;
-	*/
 
 	public void addBranches(List<AgencyBranch> branchList){
         branchList.forEach(branch -> {

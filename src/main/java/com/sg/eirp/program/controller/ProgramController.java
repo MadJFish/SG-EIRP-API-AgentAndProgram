@@ -1,6 +1,5 @@
 package com.sg.eirp.program.controller;
 
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,10 +37,10 @@ public class ProgramController extends BaseController {
 		return responseDtoOK(programService.getAllPrograms());
 	}
 	
-	@GetMapping("/get/{uuid}")
+	@GetMapping("/get")
 	@ResponseStatus(HttpStatus.OK)
-	public BaseResponseDto<ProgramDto> getProgramRequest(@PathVariable String uuid) throws URISyntaxException {
-		return responseDtoOK(programService.getByProgramId(UUID.fromString(uuid)));
+	public BaseResponseDto<ProgramDto> getProgramRequest(@RequestParam String programId) {
+		return responseDtoOK(programService.getByProgramId(UUID.fromString(programId)));
 	}
 
 	@PostMapping("/post")

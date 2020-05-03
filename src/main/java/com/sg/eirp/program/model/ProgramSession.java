@@ -35,8 +35,5 @@ public class ProgramSession {
     private Timestamp endDatetime;
 
     @Column
-    private int quota;
-    
-    @Column (name = "address_id")
-    private String addressId;
+    private String venue;
 }

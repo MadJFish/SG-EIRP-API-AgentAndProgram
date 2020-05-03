@@ -2,7 +2,7 @@ package com.sg.eirp.program.controller;
 
 import com.sg.eirp.common.controller.base.BaseController;
 import com.sg.eirp.common.dto.base.BaseResponseDto;
-import com.sg.eirp.program.dto.DocumentDto;
+import com.sg.eirp.common.dto.common.DocumentDto;
 import com.sg.eirp.program.mapper.DocumentMapper;
 import com.sg.eirp.program.model.Document;
 import com.sg.eirp.program.service.DocumentService;
@@ -34,9 +34,7 @@ public class DocumentController extends BaseController {
                 return null;
             }
 
-            Document document = null;
-            documentService.getByDocumentId(UUID.fromString(documentId))
-                    .ifPresent(document::equals);
+            Document document = documentService.getByDocumentId(UUID.fromString(documentId));
 
             DocumentMapper mapper = new DocumentMapper();
             DocumentDto documentDto = null;
