@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.sg.eirp.program.model.Program;
+import com.sg.eirp.common.dto.program.ProgramDto;
 
 public interface ProgramService {
-	Program save(Program program);
+	ProgramDto save(ProgramDto program);
 	
-	List<Program> getPrograms();
+	Optional<List<ProgramDto>> getAllPrograms();
 	
-	Optional<Program> getByProgramId(UUID programId);
+	ProgramDto getByProgramId(UUID programId);
 }

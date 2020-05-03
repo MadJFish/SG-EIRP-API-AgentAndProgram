@@ -1,15 +1,15 @@
 package com.sg.eirp.program.mapper;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import com.sg.eirp.program.base.BaseMapper;
-import com.sg.eirp.program.dto.ProgramDto;
+import com.sg.eirp.common.dto.program.ProgramDto;
+import com.sg.eirp.common.mapper.base.DtoEntityMapper;
 import com.sg.eirp.program.model.Program;
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
 
-public class ProgramMapper extends BaseMapper {
+@Component
+public class ProgramMapper extends DtoEntityMapper<ProgramDto, Program> {
 
+	/*
 	@Override
 	public Object mapObject(Object model) {
 		if (model instanceof Program) {
@@ -30,5 +30,25 @@ public class ProgramMapper extends BaseMapper {
 		}
 		return null;
 	}
+	*/
 
+	@Override
+	public Program dtoToEntity(ProgramDto programDto) {
+		if (programDto == null) {
+			return null;
+		}
+		Program program = new Program();
+		BeanUtils.copyProperties(programDto, program);
+		return program;
+	}
+
+	@Override
+	public ProgramDto entityToDto(Program program) {
+		if (program == null) {
+			return null;
+		}
+		ProgramDto programDto = new ProgramDto();
+		BeanUtils.copyProperties(program, programDto);
+		return programDto;
+	}
 }

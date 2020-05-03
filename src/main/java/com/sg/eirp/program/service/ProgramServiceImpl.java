@@ -6,6 +6,8 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import com.sg.eirp.common.dto.program.ProgramDto;
+import com.sg.eirp.program.mapper.ProgramMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,28 +21,34 @@ public class ProgramServiceImpl implements ProgramService {
 
 	@Autowired
 	private ProgramRepo programRepo;
-	
-	public ProgramServiceImpl() {
-	}
+
+	@Autowired
+	private ProgramMapper programMapper;
 	
 	@Override
-	public Program save(Program program) {
-		return programRepo.save(program);
+	public ProgramDto save(ProgramDto programDto) {
+		if (programDto != null) {
+			programDto = programMapper.entityToDto(programRepo.save(programMapper.dtoToEntity(programDto)));
+		}
+
+		return programDto;
 	}
 
 	@Override
-	public List<Program> getPrograms() {
+	public Optional<List<ProgramDto>> getAllPrograms() {
 		Iterable<Program> programIterable = programRepo.findAll();
 		
 		// convert the iterable to list
         List<Program> programList = StreamSupport.stream(programIterable.spliterator(), false)
         								.collect(Collectors.toList());
-        
-        return programList;
+
+        return programMapper.entitiesToDtos(Optional.ofNullable(programList));
 	}
 
 	@Override
-	public Optional<Program> getByProgramId(UUID programId) {
-		return programRepo.findById(programId);
+	public ProgramDto getByProgramId(UUID programId) {
+		Program program = null;
+		programRepo.findById(programId).ifPresent(program::equals);
+		return programMapper.entityToDto(program);
 	}
 }

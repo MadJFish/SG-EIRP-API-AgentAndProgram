@@ -6,6 +6,8 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import com.sg.eirp.common.dto.agency.TutorAgencyDto;
+import com.sg.eirp.program.mapper.AgencyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,26 +21,35 @@ public class AgencyServiceImpl implements AgencyService {
 
 	@Autowired
 	private AgencyRepo agencyRepo;
+
+	@Autowired
+	AgencyMapper agencyMapper;
 	
 	@Override
-	public Agency save(Agency agency) {
-		return agencyRepo.save(agency);
+	public TutorAgencyDto save(TutorAgencyDto tutorAgencyDto) {
+		if (tutorAgencyDto != null) {
+			tutorAgencyDto = agencyMapper.entityToDto(agencyRepo.save(agencyMapper.dtoToEntity(tutorAgencyDto)));
+		}
+
+		return tutorAgencyDto;
 	}
 
 	@Override
-	public List<Agency> getAgencies() {
+	public Optional<List<TutorAgencyDto>> getAgencies() {
 		Iterable<Agency> agencyIterable = agencyRepo.findAll();
 		
 		// convert the iterable to list
         List<Agency> agencyList = StreamSupport.stream(agencyIterable.spliterator(), false)
         								.collect(Collectors.toList());
-        
-        return agencyList;
+
+		return agencyMapper.entitiesToDtos(Optional.ofNullable(agencyList));
 	}
 
 	@Override
-	public Optional<Agency> getByAgencyId(UUID agencyId) {
-		return agencyRepo.findById(agencyId);
+	public TutorAgencyDto getByAgencyId(UUID agencyId) {
+		Agency agency = null;
+		agencyRepo.findById(agencyId).ifPresent(agency::equals);
+		return agencyMapper.entityToDto(agency);
 	}
 
 }

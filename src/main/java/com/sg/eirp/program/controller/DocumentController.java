@@ -1,7 +1,7 @@
 package com.sg.eirp.program.controller;
 
-import com.sg.eirp.program.base.BaseController;
-import com.sg.eirp.program.base.BaseResponseDto;
+import com.sg.eirp.common.controller.base.BaseController;
+import com.sg.eirp.common.dto.base.BaseResponseDto;
 import com.sg.eirp.program.dto.DocumentDto;
 import com.sg.eirp.program.mapper.DocumentMapper;
 import com.sg.eirp.program.model.Document;
@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 import java.util.UUID;
 
 @Log4j2
@@ -43,7 +41,7 @@ public class DocumentController extends BaseController {
             DocumentMapper mapper = new DocumentMapper();
             DocumentDto documentDto = null;
             if (document != null) {
-                documentDto = (DocumentDto) mapper.mapObject(document);
+                documentDto = (DocumentDto) mapper.entityToDto(document);
             }
 
             return responseDtoOK(documentDto);
@@ -81,7 +79,7 @@ public class DocumentController extends BaseController {
             return null;
         }
 
-        documentDto.setDocumentUrl(uploadedFileLocation);
+       documentDto.setDocumentUrl(uploadedFileLocation);
 
         // return Response.status(200).entity("File saved to " + uploadedFileLocation).build();
         return responseDtoOK(documentDto);

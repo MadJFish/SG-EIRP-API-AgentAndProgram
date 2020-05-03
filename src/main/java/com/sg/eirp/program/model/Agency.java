@@ -47,7 +47,7 @@ public class Agency {
 	private String description;
 	
 	@Column (name = "is_featured")
-	private boolean isFeatured;
+	private boolean featured;
 	
 	@Column (name = "education_level")
 	private String targetEducationLevel;

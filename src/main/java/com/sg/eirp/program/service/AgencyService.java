@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.sg.eirp.common.dto.agency.TutorAgencyDto;
 import com.sg.eirp.program.model.Agency;
 
 public interface AgencyService {
-	Agency save(Agency agency);
+	TutorAgencyDto save(TutorAgencyDto tutorAgencyDto);
 	
-	List<Agency> getAgencies();
-	
-	Optional<Agency> getByAgencyId(UUID agencyId);
+	Optional<List<TutorAgencyDto>> getAgencies();
+
+	TutorAgencyDto getByAgencyId(UUID agencyId);
 }

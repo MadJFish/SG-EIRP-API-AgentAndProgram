@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name="tb_address")
+@Table(name = "tb_address")
 public class Address {
 	
 	@Id
@@ -28,10 +28,10 @@ public class Address {
 	private String blockNo;
 	
 	@Column
-	private String latitude;
+	private double latitude;
 	
 	@Column
-	private String longitude;
+	private double longitude;
 	
 	@Column(name = "postal_code")
 	private String postalCode;

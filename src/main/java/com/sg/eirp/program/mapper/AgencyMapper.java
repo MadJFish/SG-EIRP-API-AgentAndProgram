@@ -1,16 +1,14 @@
 package com.sg.eirp.program.mapper;
 
-import com.sg.eirp.program.base.BaseMapper;
-import com.sg.eirp.program.dto.DocumentDto;
-import com.sg.eirp.program.dto.TrainerDto;
+import com.sg.eirp.common.dto.agency.TutorAgencyDto;
+import com.sg.eirp.common.mapper.base.DtoEntityMapper;
 import com.sg.eirp.program.model.Agency;
-import com.sg.eirp.program.model.Document;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
+@Component
+public class AgencyMapper extends DtoEntityMapper<TutorAgencyDto, Agency> {
 
-public class AgencyMapper extends BaseMapper {
-
-    @Override
+    /*
     public Object mapObject(Object model) {
         if (model instanceof Agency) {
             Agency agency = (Agency) model;
@@ -21,16 +19,26 @@ public class AgencyMapper extends BaseMapper {
             dto.setVideoUrl(agency.getVideoUrl());
             dto.setPromoText(agency.getTitle());
             dto.setFeatured(agency.getIsFeatured());
-            dto.setTargetEduLevels(agency.getTargetEducationLevel());
+            dto.setTargetEduLevels(CommonUtil.convertStringToList(agency.getTargetEducationLevel()));
             dto.setPhone(agency.getContact());
             dto.setEmail(agency.getEmail());
             dto.setAboutUs(agency.getAboutUs());
-            dto.setSubjects(agency.getSubjects());
-            dto.setLocations(agency.getNearbyMRT());
+            dto.setSubjects(CommonUtil.convertStringToList(agency.getSubjects()));
+            dto.setLocations(CommonUtil.convertStringToList(agency.getNearbyMRT()));
 
             return dto;
         }
         return null;
     }
+    */
 
+    @Override
+    public Agency dtoToEntity(TutorAgencyDto tutorAgencyDto) {
+        return null;
+    }
+
+    @Override
+    public TutorAgencyDto entityToDto(Agency agency) {
+        return null;
+    }
 }
