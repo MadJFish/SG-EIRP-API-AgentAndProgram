@@ -1,0 +1,9 @@
+FROM openjdk:8-jdk-alpine
+RUN apk add curl
+VOLUME /tmp
+EXPOSE 8082
+RUN mkdir /app
+ADD target/*.jar /app/EducationProgram.jar
+RUN mkdir /logs
+ENTRYPOINT ["java","-jar","/app/EducationProgram.jar"]
+RUN sh -c 'touch /app/EducationProgram.jar'
