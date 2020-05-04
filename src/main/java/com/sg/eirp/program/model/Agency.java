@@ -1,11 +1,18 @@
 package com.sg.eirp.program.model;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -27,20 +34,14 @@ public class Agency {
 	@Column
 	private String name;
 	
-	@Column (name = "image_url")
-	private String imageUrl;
-	
-	@Column (name = "video_url")
-	private String videoUrl;
-	
-	@Column
-	private String title;
+	@Column(name = "promo_text")
+	private String promoText;
 	
 	@Column
 	private String description;
 	
 	@Column (name = "is_featured")
-	private boolean isFeatured;
+	private String featured;
 	
 	@Column (name = "education_level")
 	private String targetEducationLevel;
@@ -49,17 +50,28 @@ public class Agency {
 	private String contact;
 	
 	@Column
-	private String fax;
-	
-	@Column
 	private String email;
-	
+
+	@Column(name = "about_us")
+	private String aboutUs;
+
 	@Column
 	private String subjects;
 	
 	@Column (name = "nearby_mrt")
 	private String nearbyMRT;
 	
-	@Column (name = "address_id")
-	private String addressId;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn (name = "hq_address_id", referencedColumnName = "address_id")
+	private Address hqAddress;
+	
+	@OneToMany(mappedBy = "agency", cascade = CascadeType.ALL)
+    private Set<AgencyBranch> branches = new HashSet<>();
+
+	public void addBranches(List<AgencyBranch> branchList){
+        branchList.forEach(branch -> {
+            branch.setAgency(this);
+            branches.add(branch);
+        });
+    }
 }

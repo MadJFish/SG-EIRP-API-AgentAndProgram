@@ -53,4 +53,7 @@ public class Program {
     
     @Column (name = "fee_currency")
     private String feeCurrency;
+
+    @Column
+    private String locations;
 }

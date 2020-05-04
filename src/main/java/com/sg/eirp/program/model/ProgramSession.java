@@ -27,16 +27,13 @@ public class ProgramSession {
 	
 	@Column(name = "program_id", nullable = false)
 	private UUID programId;
-    
+
     @Column (name = "start_datetime")
     private Timestamp startDatetime;
-    
+
     @Column (name = "end_datetime")
     private Timestamp endDatetime;
-    
+
     @Column
-    private int quota;
-    
-    @Column (name = "address_id")
-    private String addressId;
+    private String venue;
 }

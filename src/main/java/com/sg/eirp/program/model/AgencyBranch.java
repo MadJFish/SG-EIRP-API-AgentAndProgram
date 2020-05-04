@@ -2,10 +2,14 @@ package com.sg.eirp.program.model;
 
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -23,8 +27,9 @@ public class AgencyBranch {
     @Column(name = "agency_branch_id",columnDefinition = "BINARY(16)", updatable = false, nullable = false)
     private UUID id;
 	
-	@Column(name = "agency_id")
-	private UUID agencyId;
+	@ManyToOne
+	@JoinColumn(name = "agency_id")
+	private Agency agency;
 	
 	@Column
 	private String name;
@@ -33,14 +38,12 @@ public class AgencyBranch {
 	private String contact;
 	
 	@Column
-	private String fax;
-	
-	@Column
 	private String email;
 	
 	@Column(name = "nearby_mrt")
 	private String nearbyMRT;
 	
-	@Column(name = "address_id")
-	private UUID addressId;
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
+	private Address addressId;
 }
