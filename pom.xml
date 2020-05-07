@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sg.eirp</groupId>
-	<artifactId>program</artifactId>
+	<artifactId>EducationProgram</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>EducationProgram</name>
 	<description>Web services for education programs</description>

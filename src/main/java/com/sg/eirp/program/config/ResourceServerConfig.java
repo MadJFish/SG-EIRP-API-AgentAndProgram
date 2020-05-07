@@ -59,6 +59,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .and()
                 .antMatcher("/api/**").
                 authorizeRequests()
+                .antMatchers("/api/tutorAgency/post").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .anyRequest().authenticated();
         //.and().exceptionHandling().authenticationEntryPoint(customAuthenticationEntryPoint).accessDeniedHandler(new CustomAccessDeniedHandler());

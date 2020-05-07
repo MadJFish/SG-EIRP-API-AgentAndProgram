@@ -5,6 +5,9 @@ import com.sg.eirp.common.mapper.base.DtoEntityMapper;
 import com.sg.eirp.program.model.ProgramSession;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 @Component
@@ -24,9 +27,8 @@ public class ProgramSessionMapper extends DtoEntityMapper<ProgramSessionDto, Pro
             programSession.setProgramId(UUID.fromString(programSessionDto.getProgramId()));
         }
 
-        programSession.setStartDatetime(programSessionDto.getStartDatetime());
-
-        programSession.setEndDatetime(programSessionDto.getEndDatetime());
+        programSession.setStartDatetime(Timestamp.valueOf(programSessionDto.getStartDatetime()));
+        programSession.setEndDatetime(Timestamp.valueOf(programSessionDto.getEndDatetime()));
 
         programSession.setVenue(programSessionDto.getVenue());
 
@@ -49,9 +51,11 @@ public class ProgramSessionMapper extends DtoEntityMapper<ProgramSessionDto, Pro
             dto.setProgramId(programSession.getProgramId().toString());
         }
 
-        dto.setStartDatetime(programSession.getStartDatetime());
 
-        dto.setEndDatetime(programSession.getEndDatetime());
+        SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd");
+
+        dto.setStartDatetime(f.format(new Date(programSession.getStartDatetime().getTime())));
+        dto.setEndDatetime(f.format(new Date(programSession.getEndDatetime().getTime())));
 
         dto.setVenue(programSession.getVenue());
 
