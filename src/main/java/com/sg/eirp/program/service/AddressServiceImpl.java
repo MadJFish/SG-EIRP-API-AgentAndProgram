@@ -36,7 +36,7 @@ public class AddressServiceImpl implements AddressService {
         Address address = addressMapper.dtoToEntity(dto);
         if (address == null) {
             logger.debug("Address dto cannot convert to Address object.");
-            throw new BusinessValidationException();
+            throw new BusinessValidationException("Bad request", "Address dto cannot convert to address");
         }
 
         address = addressRepo.save(address);

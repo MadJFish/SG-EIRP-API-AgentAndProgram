@@ -46,7 +46,7 @@ public class BulletinServiceImpl implements BulletinService {
         // save bulletin
         Bulletin bulletin = bulletinRepo.save(bulletinMapper.dtoToEntity(dto));
         if (bulletin == null) {
-            throw new BusinessValidationException();
+            throw new BusinessValidationException("Bad Request", "Cannot save bulletin.");
         }
 
         // get bulletin id

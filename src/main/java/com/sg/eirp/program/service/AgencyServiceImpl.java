@@ -98,7 +98,7 @@ public class AgencyServiceImpl implements AgencyService, CommonConstants {
 		// get agency id, agency id must be valid
 		UUID agencyId = CommonUtil.convertIdtoUUID(branchDtoList.get(0).getAgencyId());
 		if (agencyId == null) {
-			throw new BusinessValidationException();
+			throw new BusinessValidationException("Bad Request", "Cannot get agency id.");
 		}
 
 		// get Agency by agency id, agency must be valid
@@ -107,7 +107,7 @@ public class AgencyServiceImpl implements AgencyService, CommonConstants {
 		if (agencyOptional.isPresent()) {
 			agency = agencyOptional.get();
 		} else {
-			throw new BusinessValidationException();
+			throw new BusinessValidationException("Bad Request", "Cannot find valid agency");
 		}
 
 		return agencyBranchService.saveAll(branchDtoList);
@@ -224,13 +224,13 @@ public class AgencyServiceImpl implements AgencyService, CommonConstants {
 	public TutorAgencyDetailDto updateDetails(TutorAgencyDetailDto dto) {
 		if (dto == null) {
 			logger.debug("Tutor agency dto cannot be null in order to update details.");
-			throw new BusinessValidationException();
+			throw new BusinessValidationException("Bad Request", "Tutor agency Detail dto cannot be null.");
 		}
 
 		UUID uuid = CommonUtil.convertIdtoUUID(dto.getId());
 		if (uuid == null) {
 			logger.debug("Tutor agency dto id cannot be null in order to update details.");
-			throw new BusinessValidationException();
+			throw new BusinessValidationException("Bad Request", "Agency Id cannot be null.");
 		}
 
 		if (!agencyRepo.findById(uuid).isPresent()) {
@@ -265,13 +265,13 @@ public class AgencyServiceImpl implements AgencyService, CommonConstants {
 	private TutorAgencyDto getTutorAgencyDocuments(TutorAgencyDto dto) {
 		if (dto == null) {
 			logger.debug("Tutor agency dto cannot be null.");
-			throw new BusinessValidationException();
+			throw new BusinessValidationException("Bad Request", "Tutor Agency dto cannot be null.");
 		}
 
 		UUID uuid = CommonUtil.convertIdtoUUID(dto.getId());
 		if (uuid == null) {
 			logger.debug("Tutor agency dto id cannot be null.");
-			throw new BusinessValidationException();
+			throw new BusinessValidationException("Bad Request", "Agency id cannot be null.");
 		}
 
 		// get document dto
