@@ -26,7 +26,7 @@ public class ProgramMapper extends DtoEntityMapper<ProgramDto, Program> {
 		}
 		*/
 		program.setAgencyId(UUID.randomUUID());
-
+		program.setFeatured(programDto.getFeatured());
 		program.setName(programDto.getProgramName());
 		program.setDescription(programDto.getProgramDescription());
 		program.setDetails(programDto.getProgramDetailParagraph());
@@ -58,6 +58,7 @@ public class ProgramMapper extends DtoEntityMapper<ProgramDto, Program> {
 			dto.setAgencyId(program.getAgencyId().toString());
 		}
 
+		dto.setFeatured(program.getFeatured());
 		dto.setProgramName(program.getName());
 		dto.setProgramDescription(program.getDescription());
 		dto.setProgramDetailParagraph(program.getDetails());
