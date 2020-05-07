@@ -12,6 +12,10 @@ public interface DocumentService {
 
     Optional<List<DocumentDto>> getDocumentsByReference(String referenceTable, UUID referenceId);
 
+    DocumentDto save(DocumentDto documentDto);
+
+    DocumentDto save(DocumentDto documentDto, String referenceTable, UUID referenceId);
+
     List<DocumentDto> saveAll(List<Document> documentList);
 
     List<DocumentDto> saveAll(List<DocumentDto> documentDtoList, String referenceTable, UUID referenceId);

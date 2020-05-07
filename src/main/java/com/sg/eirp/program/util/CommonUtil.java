@@ -1,14 +1,20 @@
 package com.sg.eirp.program.util;
 
+import com.sg.eirp.common.exceptions.BusinessValidationException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class CommonUtil implements CommonConstants {
+
+    private static Logger logger = LoggerFactory.getLogger(CommonUtil.class);
 
     public static List<String> convertArrayToList(String[] array) {
         List<String> list = new ArrayList<>();
@@ -72,5 +78,13 @@ public class CommonUtil implements CommonConstants {
 
     public static Boolean convertBitToBoolean(String bit) {
         return bit != null && bit.equals("1");
+    }
+
+    public static UUID convertIdtoUUID(String id) {
+        if (id == null) {
+            return null;
+        }
+
+        return UUID.fromString(id);
     }
 }

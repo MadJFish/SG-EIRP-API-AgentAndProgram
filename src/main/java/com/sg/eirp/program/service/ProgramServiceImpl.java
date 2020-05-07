@@ -10,7 +10,6 @@ import com.sg.eirp.common.dto.common.DocumentDto;
 import com.sg.eirp.common.dto.program.ProgramDto;
 import com.sg.eirp.common.dto.program.ProgramSessionDto;
 import com.sg.eirp.program.mapper.ProgramMapper;
-import com.sg.eirp.program.model.ProgramSession;
 import com.sg.eirp.program.util.CommonConstants;
 import com.sg.eirp.program.util.CommonUtil;
 import org.slf4j.Logger;
@@ -117,6 +116,30 @@ public class ProgramServiceImpl implements ProgramService, CommonConstants {
 		}
 
 		return getProgramDtoDetails(dto);
+	}
+
+	@Override
+	public Optional<List<ProgramDto>> getProgramsByAgencyId(UUID agencyId) {
+		if (agencyId == null) {
+			return null;
+		}
+
+		Optional<List<ProgramDto>> programDtoListOptional = programMapper.entitiesToDtos(programRepo.getByAgencyId(agencyId));
+		List<ProgramDto> programDtoList = null;
+		if (programDtoListOptional.isPresent()) {
+			programDtoList = programDtoListOptional.get()
+								.stream()
+								.map(programDto -> getProgramDtoDetails(programDto))
+								.collect(Collectors.toList());
+		}
+
+		if (programDtoList == null) {
+			logger.info("#### program size: null");
+		} else {
+			logger.info("#### program size: " + programDtoList.size());
+		}
+
+		return Optional.ofNullable(programDtoList);
 	}
 
 	private ProgramDto getProgramDtoDetails(ProgramDto dto) {

@@ -20,12 +20,13 @@ public class ProgramMapper extends DtoEntityMapper<ProgramDto, Program> {
 			program.setId(UUID.fromString(programDto.getProgramId()));
 		}
 
-		/*
 		if (programDto.getAgencyId() != null) {
 			program.setAgencyId(UUID.fromString(programDto.getAgencyId()));
 		}
-		*/
+
+		/*
 		program.setAgencyId(UUID.randomUUID());
+		*/
 
 		program.setName(programDto.getProgramName());
 		program.setDescription(programDto.getProgramDescription());

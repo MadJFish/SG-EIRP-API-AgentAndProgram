@@ -24,12 +24,11 @@ import lombok.Setter;
 public class AgencyBranch {
 	@Id
     @GeneratedValue
-    @Column(name = "agency_branch_id",columnDefinition = "BINARY(16)", updatable = false, nullable = false)
+    @Column(name = "agency_branch_id", columnDefinition = "BINARY(16)", updatable = false, nullable = false)
     private UUID id;
-	
-	@ManyToOne
-	@JoinColumn(name = "agency_id")
-	private Agency agency;
+
+	@JoinColumn(name = "agency_id", columnDefinition = "BINARY(16)", updatable = false, nullable = false)
+	private UUID agencyId;
 	
 	@Column
 	private String name;
@@ -42,8 +41,7 @@ public class AgencyBranch {
 	
 	@Column(name = "nearby_mrt")
 	private String nearbyMRT;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
-	private Address addressId;
+
+    @Column(name = "address_id", columnDefinition = "BINARY(16)")
+	private UUID addressId;
 }

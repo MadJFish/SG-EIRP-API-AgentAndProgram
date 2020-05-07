@@ -20,10 +20,10 @@ import lombok.Setter;
 public class AgencyLeadership {
 	@Id
     @GeneratedValue
-    @Column(name = "agency_leadership_id",columnDefinition = "BINARY(16)", updatable = false, nullable = false)
+    @Column(name = "agency_leadership_id", columnDefinition = "BINARY(16)", updatable = false, nullable = false)
     private UUID id;
 	
-	@Column(name = "agency_id", nullable = false)
+	@Column(name = "agency_id", columnDefinition = "BINARY(16)", updatable = false, nullable = false)
 	private UUID agencyId;
 	
 	@Column

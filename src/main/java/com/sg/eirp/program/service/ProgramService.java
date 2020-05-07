@@ -12,4 +12,6 @@ public interface ProgramService {
 	Optional<List<ProgramDto>> getAllPrograms();
 	
 	ProgramDto getByProgramId(UUID programId);
+
+	Optional<List<ProgramDto>> getProgramsByAgencyId(UUID agencyId);
 }

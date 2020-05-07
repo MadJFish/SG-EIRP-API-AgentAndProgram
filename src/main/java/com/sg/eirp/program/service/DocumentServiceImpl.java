@@ -43,6 +43,32 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
+    public DocumentDto save(DocumentDto documentDto) {
+        if (documentDto == null) {
+            return null;
+        }
+
+        return documentMapper.entityToDto(documentRepo.save(documentMapper.dtoToEntity(documentDto)));
+    }
+
+    @Override
+    public DocumentDto save(DocumentDto documentDto, String referenceTable, UUID referenceId) {
+        if (documentDto == null || referenceTable == null || referenceId == null) {
+            return null;
+        }
+
+        Document document = documentMapper.dtoToEntity(documentDto);
+        if (document == null) {
+            return null;
+        }
+
+        document.setReferenceTable(referenceTable);
+        document.setReferenceId(referenceId);
+
+        return documentMapper.entityToDto(documentRepo.save(document));
+    }
+
+    @Override
     public List<DocumentDto> saveAll(List<Document> documentList) {
         if (documentList == null || documentList.isEmpty()) {
             return null;

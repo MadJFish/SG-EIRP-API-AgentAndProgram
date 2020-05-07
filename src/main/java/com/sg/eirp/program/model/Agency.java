@@ -65,13 +65,6 @@ public class Agency {
 	@JoinColumn (name = "hq_address_id", referencedColumnName = "address_id")
 	private Address hqAddress;
 	
-	@OneToMany(mappedBy = "agency", cascade = CascadeType.ALL)
-    private Set<AgencyBranch> branches = new HashSet<>();
-
-	public void addBranches(List<AgencyBranch> branchList){
-        branchList.forEach(branch -> {
-            branch.setAgency(this);
-            branches.add(branch);
-        });
-    }
+	// @OneToMany(mappedBy = "agency", cascade = CascadeType.ALL)
+    // private Set<AgencyBranch> branches = new HashSet<>();
 }
