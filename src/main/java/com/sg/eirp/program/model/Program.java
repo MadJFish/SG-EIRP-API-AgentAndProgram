@@ -58,5 +58,5 @@ public class Program {
     private String locations;
 
     @Column (name = "is_featured")
-    private Boolean featured;
+    private String featured;
 }

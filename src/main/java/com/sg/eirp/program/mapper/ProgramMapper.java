@@ -3,6 +3,7 @@ package com.sg.eirp.program.mapper;
 import com.sg.eirp.common.dto.program.ProgramDto;
 import com.sg.eirp.common.mapper.base.DtoEntityMapper;
 import com.sg.eirp.program.model.Program;
+import com.sg.eirp.program.util.CommonUtil;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -39,7 +40,7 @@ public class ProgramMapper extends DtoEntityMapper<ProgramDto, Program> {
 		program.setFee(programDto.getFee());
 		program.setFeeCurrency(programDto.getFeeCurrency());
 		program.setLocations(programDto.getLocations());
-
+		program.setFeatured(CommonUtil.convertBooleanToBit(programDto.getFeatured()));
 		return program;
 	}
 
@@ -70,7 +71,7 @@ public class ProgramMapper extends DtoEntityMapper<ProgramDto, Program> {
 		dto.setFee(program.getFee());
 		dto.setFeeCurrency(program.getFeeCurrency());
 		dto.setLocations(program.getLocations());
-
+		dto.setFeatured(CommonUtil.convertBitToBoolean(program.getFeatured()));
 		return dto;
 	}
 }
