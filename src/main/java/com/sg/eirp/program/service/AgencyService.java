@@ -20,6 +20,8 @@ public interface AgencyService {
 
 	TutorAgencyDto getByAgencyId(UUID agencyId);
 
+	// Optional<List<TutorAgencyDto>> getByUserId(UUID userId);
+
 	TutorAgencyDetailDto getDetailsByAgencyId(UUID agencyId);
 
 	TutorAgencyDetailDto updateDetails(TutorAgencyDetailDto dto);

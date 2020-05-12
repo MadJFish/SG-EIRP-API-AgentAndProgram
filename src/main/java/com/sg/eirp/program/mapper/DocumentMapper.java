@@ -3,6 +3,8 @@ package com.sg.eirp.program.mapper;
 import com.sg.eirp.common.dto.common.DocumentDto;
 import com.sg.eirp.common.mapper.base.DtoEntityMapper;
 import com.sg.eirp.program.model.Document;
+import com.sg.eirp.program.util.CommonConstants;
+import com.sg.eirp.program.util.DocumentUtil;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -27,7 +29,17 @@ public class DocumentMapper extends DtoEntityMapper<DocumentDto, Document> {
 
         document.setMime(documentDto.getMime());
 
-        document.setUrl(documentDto.getDocumentUrl());
+        String url = documentDto.getDocumentUrl();
+        if (url != null && url.contains(CommonConstants.S3_URL)) {
+            url = url.replace(CommonConstants.S3_URL, CommonConstants.EMPTY_STRING);
+        }
+        document.setUrl(url);
+
+        if (documentDto.getReferenceId() != null) {
+            document.setReferenceId(UUID.fromString(documentDto.getReferenceId()));
+        }
+
+        document.setReferenceTable(DocumentUtil.getFileUploadTypeMapping(documentDto.getUploadType()));
 
         return document;
     }
@@ -50,7 +62,17 @@ public class DocumentMapper extends DtoEntityMapper<DocumentDto, Document> {
 
         dto.setMime(document.getMime());
 
-        dto.setDocumentUrl(document.getUrl());
+        String url = document.getUrl();
+        if (url != null) {
+            url = CommonConstants.S3_URL + url;
+        }
+        dto.setDocumentUrl(url);
+
+        if (document.getReferenceId() != null) {
+            dto.setReferenceId(document.getReferenceId().toString());
+        }
+
+        dto.setUploadType(DocumentUtil.getReferenceTableMapping(document.getReferenceTable()));
 
         return dto;
     }

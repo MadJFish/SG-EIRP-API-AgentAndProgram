@@ -5,49 +5,69 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 
 public class DocumentUtil {
-    public static final String UPLOAD_FOLDER = DocumentUtil.class.getResource("resources/").getPath() + "file/";
-    public static final int MAX_FILE_SIZE = 999999999;
 
-    /**
-     * Utility method to save InputStream data to target location/file
-     *
-     * @param file
-     *            - MultipartFile to be saved
-     * @param target
-     *            - full path to destination file
-     */
-    public static void saveToFile(MultipartFile file, String target)
-            throws IOException {
-        if (!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                OutputStream out = new FileOutputStream(new File(target));
-                BufferedOutputStream stream = new BufferedOutputStream(out);
-                stream.write(bytes);
-                out.flush();
-                out.close();
-                stream.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    public static String getFileUploadTypeMapping(String fileUploadType) {
+        if (fileUploadType == null) {
+            return null;
         }
+
+        if (fileUploadType.equals("user")) {
+            return "tb_user";
+        }
+
+        if (fileUploadType.equalsIgnoreCase("agency")) {
+            return "tb_agency";
+        }
+
+        if (fileUploadType.equalsIgnoreCase("agencyBranch")) {
+            return "tb_agency_branch";
+        }
+
+        if (fileUploadType.equalsIgnoreCase("agencyLeadership")) {
+            return "tb_agency_leadership";
+        }
+
+        if (fileUploadType.equalsIgnoreCase("program")) {
+            return "tb_program";
+        }
+
+        if (fileUploadType.equalsIgnoreCase("leadership")) {
+            return "tb_agency_leadership";
+        }
+
+        return null;
     }
 
-    /**
-     * Creates a folder to desired location if it not already exists
-     *
-     * @param dirName
-     *            - full path to the folder
-     * @throws SecurityException
-     *             - in case you don't have permission to create the folder
-     */
-    public static void createFolderIfNotExists(String dirName)
-            throws SecurityException {
-        File theDir = new File(dirName);
-        if (!theDir.exists()) {
-            theDir.mkdir();
+    public static String getReferenceTableMapping(String referenceTable) {
+        if (referenceTable == null) {
+            return null;
         }
-    }
 
+        if (referenceTable.equalsIgnoreCase("tb_user")) {
+            return "user";
+        }
+
+        if (referenceTable.equalsIgnoreCase("tb_agency")) {
+            return "agency";
+        }
+
+        if (referenceTable.equalsIgnoreCase("tb_agency_branch")) {
+            return "agencyBranch";
+        }
+
+        if (referenceTable.equalsIgnoreCase("tb_agency_leadership")) {
+            return "agencyLeadership";
+        }
+
+        if (referenceTable.equalsIgnoreCase("tb_program")) {
+            return "program";
+        }
+
+        if (referenceTable.equalsIgnoreCase("tb_agency_leadership")) {
+            return "leadership";
+        }
+
+        return null;
+    }
 
 }

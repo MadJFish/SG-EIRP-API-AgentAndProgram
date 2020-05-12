@@ -1,5 +1,6 @@
 package com.sg.eirp.program.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sg.eirp.common.dto.common.DocumentDto;
 import com.sg.eirp.program.model.Document;
 
@@ -12,7 +13,7 @@ public interface DocumentService {
 
     Optional<List<DocumentDto>> getDocumentsByReference(String referenceTable, UUID referenceId);
 
-    DocumentDto save(DocumentDto documentDto);
+    DocumentDto save(DocumentDto documentDto) throws JsonProcessingException;
 
     DocumentDto save(DocumentDto documentDto, String referenceTable, UUID referenceId);
 

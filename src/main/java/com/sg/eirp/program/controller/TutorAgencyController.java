@@ -51,6 +51,13 @@ public class TutorAgencyController extends BaseController {
         return responseDtoOK(agencyService.getByAgencyId(CommonUtil.convertIdtoUUID(tutorAgencyId)));
     }
 
+    /*
+    @GetMapping("/get/byUserId")
+    public BaseResponseDto<List<TutorAgencyDto>> getUserTutorAgencyRequest(@RequestParam String userId) {
+        return responseDtoOk()
+    }
+    */
+
     @PostMapping("/post")
     @ResponseStatus(HttpStatus.CREATED)
     public BaseResponseDto<TutorAgencyDto> saveTutorAgencyRequest(@RequestBody TutorAgencyDto tutorAgencyDto) {

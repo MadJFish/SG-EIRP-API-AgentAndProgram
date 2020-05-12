@@ -1,9 +1,14 @@
 package com.sg.eirp.program.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.sg.eirp.common.dto.common.DocumentDto;
 import com.sg.eirp.program.mapper.DocumentMapper;
 import com.sg.eirp.program.model.Document;
 import com.sg.eirp.program.repo.DocumentRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +23,8 @@ import java.util.stream.StreamSupport;
 @Transactional(rollbackFor = Exception.class)
 @Service
 public class DocumentServiceImpl implements DocumentService {
+
+    private Logger logger = LoggerFactory.getLogger(DocumentServiceImpl.class);
 
     @Autowired
     private DocumentRepo documentRepo;
@@ -36,19 +43,28 @@ public class DocumentServiceImpl implements DocumentService {
             return null;
         }
 
-        List<Document> documentList = new ArrayList<>();
-        documentRepo.findByReferenceId(referenceTable, referenceId).ifPresent(documentList::addAll);
+        logger.info("Reference Table: " + referenceTable);
+        logger.info("Reference id: " + referenceId.toString());
 
-        return documentMapper.entitiesToDtos(Optional.ofNullable(documentList));
+        Optional<List<Document>> documentListOptional = documentRepo.findByReferenceId(referenceTable, referenceId);
+
+        return documentMapper.entitiesToDtos(documentListOptional);
     }
 
     @Override
-    public DocumentDto save(DocumentDto documentDto) {
+    public DocumentDto save(DocumentDto documentDto) throws JsonProcessingException {
         if (documentDto == null) {
             return null;
         }
 
-        return documentMapper.entityToDto(documentRepo.save(documentMapper.dtoToEntity(documentDto)));
+        Document doc = documentMapper.dtoToEntity(documentDto);
+
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        String json = ow.writeValueAsString(doc);
+
+        logger.info("Document: " + json);
+
+        return documentMapper.entityToDto(documentRepo.save(doc));
     }
 
     @Override

@@ -160,6 +160,13 @@ public class AgencyServiceImpl implements AgencyService, CommonConstants {
 		return getTutorAgencyDocuments(dto);
 	}
 
+	/*
+	@Override
+	public Optional<List<TutorAgencyDto>> getByUserId(UUID userId) {
+		return Optional.empty();
+	}
+	*/
+
 	@Override
 	public TutorAgencyDetailDto getDetailsByAgencyId(UUID agencyId) {
 		// get Agency
@@ -264,18 +271,18 @@ public class AgencyServiceImpl implements AgencyService, CommonConstants {
 
 	private TutorAgencyDto getTutorAgencyDocuments(TutorAgencyDto dto) {
 		if (dto == null) {
-			logger.debug("Tutor agency dto cannot be null.");
+			logger.info("Tutor agency dto cannot be null.");
 			throw new BusinessValidationException("Bad Request", "Tutor Agency dto cannot be null.");
 		}
 
 		UUID uuid = CommonUtil.convertIdtoUUID(dto.getId());
 		if (uuid == null) {
-			logger.debug("Tutor agency dto id cannot be null.");
+			logger.info("Tutor agency dto id cannot be null.");
 			throw new BusinessValidationException("Bad Request", "Agency id cannot be null.");
 		}
 
 		// get document dto
-		Optional<List<DocumentDto>> documentDtoOptional = documentService.getDocumentsByReference(DOCUMENT_TABLE, uuid);
+		Optional<List<DocumentDto>> documentDtoOptional = documentService.getDocumentsByReference(AGENCY_TABLE, uuid);
 		if (documentDtoOptional.isPresent()) {
 			dto.setTutorAgencyDocuments(documentDtoOptional.get());
 		}

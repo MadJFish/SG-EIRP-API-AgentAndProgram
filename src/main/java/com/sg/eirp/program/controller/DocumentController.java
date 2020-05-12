@@ -48,39 +48,4 @@ public class DocumentController extends BaseController {
             return null;
         }
     }
-
-    @PostMapping("/upload")
-    @ResponseStatus(HttpStatus.CREATED)
-    public BaseResponseDto<DocumentDto> uploadDocument(@RequestParam("file") MultipartFile file, @RequestBody DocumentDto documentDto) {
-        // check if all form parameters are provided
-        if (file == null || documentDto == null) {
-            // return Response.status(400).entity("Invalid form data").build();
-            return null;
-        }
-
-        // create our destination folder, if it not exists
-        try {
-            DocumentUtil.createFolderIfNotExists(DocumentUtil.UPLOAD_FOLDER);
-        } catch (SecurityException se) {
-            se.printStackTrace();
-            // return Response.status(500).entity("Can not create destination folder on server").build();
-            return null;
-        }
-
-        // save file to server
-        String uploadedFileLocation = DocumentUtil.UPLOAD_FOLDER + documentDto.getDocumentName();
-        try {
-            DocumentUtil.saveToFile(file, uploadedFileLocation);
-        } catch (IOException e) {
-            e.printStackTrace();
-            // return Response.status(500).entity("Can not save file").build();
-            return null;
-        }
-
-       documentDto.setDocumentUrl(uploadedFileLocation);
-
-        // return Response.status(200).entity("File saved to " + uploadedFileLocation).build();
-        return responseDtoOK(documentDto);
-    }
-
 }
