@@ -18,12 +18,12 @@ public class Code {
     @Column(name = "code_id", columnDefinition = "BINARY(16)", updatable = false, nullable = false)
     private UUID id;
 
-    @Column
+    @Column(columnDefinition = "VARCHAR(50)")
     private String type;
 
-    @Column
+    @Column(columnDefinition = "VARCHAR(50)")
     private String value;
 
-    @Column
+    @Column(columnDefinition = "VARCHAR(200)")
     private String description;
 }

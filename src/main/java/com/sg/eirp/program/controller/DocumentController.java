@@ -6,15 +6,12 @@ import com.sg.eirp.common.dto.common.DocumentDto;
 import com.sg.eirp.program.mapper.DocumentMapper;
 import com.sg.eirp.program.model.Document;
 import com.sg.eirp.program.service.DocumentService;
-import com.sg.eirp.program.util.DocumentUtil;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.UUID;
 
 @Log4j2
