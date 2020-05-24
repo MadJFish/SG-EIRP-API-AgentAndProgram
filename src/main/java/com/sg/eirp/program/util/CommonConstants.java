@@ -16,5 +16,7 @@ public interface CommonConstants {
     String TEMP_FOLDER_NAME = "temp";
     String DIRECTORY_SEPARATOR = "/";
 
+    String CODE_TYPE_RESOURCE = "Resource";
+
     String S3_URL = "https://eirp-images.s3-ap-southeast-1.amazonaws.com/";
 }
